@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansh Gupta | DevOps Portfolio 🚀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & font */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #0F111A;
+            color: #ECEFF4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Card container */
+        .card {
+            display: flex;
+            max-width: 950px;
+            width: 100%;
+            background: #1C1E2A;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Left side: profile */
+        .profile {
+            flex: 0 0 280px;
+            background: linear-gradient(180deg, #4ACDF7, #2B9ED9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .profile img:hover {
+            box-shadow: 0 0 25px #4ACDF7, 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: scale(1.05);
+        }
+
+        .profile h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .profile p {
+            font-size: 1rem;
+            color: #e0e0e0;
+            text-align: center;
+        }
+
+        /* Right side: content */
+        .content {
+            flex: 1;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            font-size: 1.4rem;
+            color: #4ACDF7;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #4ACDF7;
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        .section p {
+            font-size: 1rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 15px;
+            background: #252836;
+            border-radius: 15px;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        .messages p {
+            background: #33354A;
+            padding: 10px 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        form {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 12px 0 0 12px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            background: #33354A;
+            color: #fff;
+        }
+
+        input[type="text"]::placeholder {
+            color: #bbb;
+        }
+
+        input[type="submit"] {
+            padding: 12px 20px;
+            border-radius: 0 12px 12px 0;
+            border: none;
+            background: #4ACDF7;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: #2B9ED9;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .card {
+                flex-direction: column;
+            }
+
+            .profile {
+                flex: none;
+                padding: 30px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <!-- Profile -->
+        <div class="profile">
+            <img src="1.png" alt="Ansh Photo">
+            <h2>Ansh Gupta</h2>
+            <p>Student | Aspiring Cloud & DevOps Engineer</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="section">
+                <h3>About Me</h3>
+                <p>Hi, I'm <b>Ansh</b> 👋, a student passionate about Cloud, DevOps, and automation. I love building scalable and reliable systems.</p>
+            </div>
+
+            <div class="section">
+                <h3>Projects</h3>
+                <p>I have deployed a 2-tier Flask application (Flask + MySQL) on AWS EC2 using Docker. Docker Compose manages containers with volumes and a custom network. The source code is hosted on GitHub, with Jenkins integrated for CI/CD pipeline automation.</p>
+            </div>
+
+            <div class="section">
+                <h3>Messages</h3>
+                <div class="messages">
+                    {% for message in messages %}
+                        <p>{{ message[0] }}</p>
+                    {% endfor %}
+                </div>
+
+                <form id="messageForm">
+                    <input type="text" name="new_message" placeholder="Type your message..." required>
+                    <input type="submit" value="Send">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#messageForm").on("submit", function(event) {
+                event.preventDefault();
+                let messageInput = $("input[name='new_message']");
+                let message = messageInput.val().trim();
+
+                if (message === "") {
+                    alert("Message cannot be empty!");
+                    return;
+                }
+
+                $.ajax({
+                    url: "/submit",
+                    type: "POST",
+                    data: { new_message: message },
+                    success: function(response) {
+                        if (response && response.message) {
+                            $(".messages").append("<p>" + response.message + "</p>");
+                            messageInput.val("");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error:", status, error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
+
