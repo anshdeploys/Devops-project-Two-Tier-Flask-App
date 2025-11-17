@@ -11,7 +11,7 @@ pipeline{
         }
         stage("Build"){
             steps{
-                sh "docker build -t Two-Tier-Flask-App:latest ."
+                sh "docker build -t two-tier-flask-app:latest ."
                 echo "Docker image created successfuly"
             }
         }
@@ -23,8 +23,8 @@ pipeline{
                     passwordVariable:"DockerPass"
                 )]){
                     sh "docker login -u ${env.DockerUser} -p ${env.DockerPass}"
-                    sh "docker image tag Two-Tier-Flask-App ${env.DockerUser}/Two-Tier-Flask-App:latest"
-                    sh "docker push ${env.DockerUser}/Two-Tier-Flask-App:latest"
+                    sh "docker image tag two-tier-flask-app ${env.DockerUser}/two-tier-flask-app:latest"
+                    sh "docker push ${env.DockerUser}/two-tier-flask-app:latest"
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline{
         }
         stage("Deploy"){
             steps{
-                sh "docker compose up -d --build"
+                sh "docker compose up -d --build ${env.DockerUser}/two-tier-flask-app:latest"
                 echo "Docker compose done"
             }
         }
